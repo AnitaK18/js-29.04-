@@ -1,5 +1,5 @@
 
-1
+//1
 function Cat(name, age) {
   let privateName = name;
   let privateAge = age;
@@ -13,15 +13,16 @@ function Cat(name, age) {
   }
 
   return {
-    getName: function() {
+    getName() {
       return privateName;
     },
-    getAge: function() {
+    getAge() {
       return privateAge;
     },
     setName: setName,
     setAge: setAge
-  }
+}
+
 }
 
 const tom = Cat('Tom', 4);
