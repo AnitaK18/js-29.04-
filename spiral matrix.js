@@ -1,36 +1,42 @@
-var input = [[1,  2,   3,  4],
-             [5,  6,   7,  8],
-             [9,  10, 11, 12],
-             [13, 14, 15, 16]];
-
-var spiralOrder = function (matrix) {
-    let top = 0;
-    let left = 0;
-    let bottom = matrix.length - 1;
-    let right = matrix[0].length - 1;
-    const result = [];
-    const size = matrix.length * matrix[0].length;
-    while (result.length < size) {
-        for (let i = left; i <= right && result.length < size; i++) {
-            result.push(matrix[top][i]);
-        }
-        top++;
-        for (let i = top; i <= bottom && result.length < size; i++) {
-            result.push(matrix[i][right]);
-        }
-        right--;
-        for (let i = right; i >= left && result.lenght < size; i--) {
-            result.push(matrix[bottom][i]);
-        }
-        bottom--;
-        for (let i = bottom; i >= top && result.lenght < size; i--) {
-            result.push(matrix[i][left]);
-        }
-        left++;
+function matrix(n) {
+  const results = [];
+  for (let i = 0; i < n; i++) {
+    results.push([]);
+  }
+  let counter = 1;
+  let startColumn = 0;
+  let endColumn = n - 1;
+  let startRow = 0;
+  let endRow = n - 1;
+  while (startColumn <= endColumn && startRow <= endRow) {
+    // Top row
+    for (let i = startColumn; i <= endColumn; i++) {
+      results[startRow][i] = counter;
+      counter++;
     }
-    return result;
+    startRow++;
+    // Right column
+    for (let i = startRow; i <= endRow; i++) {
+      results[i][endColumn] = counter;
+      counter++;
+    }
+    endColumn--;
+    // Bottom row
+    for (let i = endColumn; i >= startColumn; i--) {
+      results[endRow][i] = counter;
+      counter++;
+    }
+    endRow--;
+    // Start column
+    for (let i = endRow; i >= startRow; i--) {
+      results[i][startColumn] = counter;
+      counter++;
+    }
+    startColumn++;
+  }
+  return results;
+}
 
-};
-var result = spiralOrder(input);
-
-console.log('result', result);
+const n = 5;
+const result = matrix(n);
+console.log(result);
